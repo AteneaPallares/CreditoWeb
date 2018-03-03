@@ -20,7 +20,7 @@ namespace CreditoWeb.Models
 
             TipoTarjeta = tipoDeTarjeta();            
         }
-        bool validando=false;
+        
 
 
         /// Basado en el algoritmo de Luhn determinar si esta tarjeta es valida
@@ -30,6 +30,7 @@ namespace CreditoWeb.Models
             int suma=0,dos=0;
             bool cadados=true;
             int total=0;
+            bool validando=false;
         
         if(TarjetaNum.Length>12 && TarjetaNum.Length<19){
             validando=true;
@@ -57,7 +58,6 @@ namespace CreditoWeb.Models
             }}
             int suma_total=suma+total;
             if(suma_total%10==0 && validando==true){
-                TipoTarjeta=TipoTarjeta.NOVALIDA;
                 Valida=true;
                 
             }
@@ -73,7 +73,7 @@ namespace CreditoWeb.Models
         private TipoTarjeta tipoDeTarjeta()
         {
             var soluci=TipoTarjeta.NOVALIDA;
-            if(validando==true){
+            if(Valida==true){
                 int m=(int)Char.GetNumericValue(TarjetaNum[0]);
                 int r=(int)Char.GetNumericValue(TarjetaNum[1]);
                 if(((m==3 && r==4)||(m==3 && r==7))&&TarjetaNum.Length==15){
